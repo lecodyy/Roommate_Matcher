@@ -21,7 +21,7 @@ class User(db.Model):
     phone = db.Column(db.String(20), nullable=False)
     
     # Lifestyle Metrics
-    age = db.Column(db.Integer, nullable=True)
+    year = db.Column(db.Integer, nullable=True)      # replaces age
     gender = db.Column(db.String(20), nullable=True)
     hobbies = db.Column(db.String(200), nullable=True)
     budget = db.Column(db.Integer, nullable=True)
@@ -30,6 +30,12 @@ class User(db.Model):
     sleep_schedule = db.Column(db.String(20), nullable=True)
     smoking = db.Column(db.Boolean, default=False)
     drinking = db.Column(db.Boolean, default=False)
+
+
+
+    # Personification
+    bio = db.Column(db.Text, nullable=True)
+    profile_image = db.Column(db.String(300), nullable=True)
     
 # Chat feature
 class Message(db.Model):
@@ -88,7 +94,7 @@ def preferences(user_id):
     
     if request.method == 'POST':
         # Update the user's empty columns with the form data
-        user.age = request.form.get('age')
+        user.year = request.form.get('year')
         user.gender = request.form.get('gender')
         user.hobbies = request.form.get('hobbies')
         user.budget = request.form.get('budget')

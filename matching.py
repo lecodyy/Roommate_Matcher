@@ -1,9 +1,9 @@
 # matching.py
 
-def age_similarity(age1, age2):
-    if not age1 or not age2:
+def year_similarity(year1, year2):
+    if not year1 or not year2:
         return 0
-    diff = abs(age1 - age2)
+    diff = abs(year1 - year2)
     return max(0, 1 - (diff / 4))  # max diff of 4 (freshman vs senior)
 
 
@@ -38,8 +38,8 @@ def calculate_compatibility(user, other):
         max_score += 100 * 0.15
 
     # Class year (10%)
-    if user.age and other.age:
-        score += age_similarity(user.age, other.age) * 100 * 0.10
+    if user.year and other.year:
+        score += year_similarity(user.year, other.year) * 100 * 0.10
         max_score += 100 * 0.10
 
     # Smoking (10%)

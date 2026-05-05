@@ -3,86 +3,143 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Compatibility Metrics</title>
+    <title>Set Preferences - Roommate Matcher</title>
     <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
 </head>
 <body>
-    <div class="container">
-        <h1>Set Your Compatibility Metrics</h1>
-        <p>Turn your subjective lifestyle choices into objective matching criteria.</p>
-        
-        <form action="/preferences/{{ user_id }}" method="POST">
-            <h3>Basic Info</h3>
-            <label>Age: <input type="number" name="age" required></label><br><br>
-            
-            <label>Gender: 
-                <select name="gender">
-                    <option value="male">Male</option>
-                    <option value="female">Female</option>
-                    <option value="other">Other</option>
-                </select>
-            </label><br><br>
-            
-            <label>Hobbies: <input type="text" name="hobbies" placeholder="e.g. Gaming, Hiking"></label><br><br>
-            <label>Budget (Monthly $): <input type="number" name="budget" required></label><br><br>
+    <div class="container" style="text-align: center;">
+        <h1>Set Your Preferences</h1>
+        <p>Help us find your ideal roommate.</p>
 
-            <h3>Quantifying Lifestyle Habits</h3>
-            
-            <label>Cleanliness Standard:</label>
-            <div class="slider-wrapper">
-                <span class="slider-bubble" id="cleanBubble">80%</span>
-                <input type="range" id="cleanSlider" name="cleanliness" min="0" max="100" value="80" 
-                       oninput="updateSlider('cleanSlider', 'cleanBubble')">
-            </div>
-            
-            <label>Noise Level Preference:</label>
-            <div class="slider-wrapper">
-                <span class="slider-bubble" id="noiseBubble">30%</span>
-                <input type="range" id="noiseSlider" name="noise" min="0" max="100" value="30" 
-                       oninput="updateSlider('noiseSlider', 'noiseBubble')">
+        <form action="/preferences/{{ user_id }}" method="POST" style="display: flex; flex-direction: column; align-items: center; gap: 8px;">
+
+            <div style="width: 80%; text-align: left;">
+                <h3 style="margin-top: 0;">Basic Info</h3>
+                <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 12px;">
+                    <div>
+                        <label style="display: block; font-size: 13px; margin-bottom: 6px;">Grad Year</label>
+                        <select name="year" style="width: 100%; box-sizing: border-box;">
+                            <option value="" disabled selected>Select year</option>
+                            <option value="2025">2025</option>
+                            <option value="2026">2026</option>
+                            <option value="2027">2027</option>
+                            <option value="2028">2028</option>
+                        </select>
+                    </div>
+                    <div>
+                        <label style="display: block; font-size: 13px; margin-bottom: 6px;">Gender</label>
+                        <select name="gender" style="width: 100%; box-sizing: border-box;">
+                            <option value="male">Male</option>
+                            <option value="female">Female</option>
+                            <option value="other">Other</option>
+                        </select>
+                    </div>
+                </div>
             </div>
 
-            <label>Sleep Schedule:
-                <select name="sleep_schedule">
+            <div style="width: 80%; text-align: left; margin-top: 1.5rem;">
+                <h3>Hobbies</h3>
+                <p style="font-size: 13px; color: #4A5568; margin-bottom: 8px;">General interests</p>
+                <div style="display: flex; flex-wrap: wrap; gap: 8px; margin-bottom: 12px;">
+                    <span class="hobby-tag" onclick="toggleTag(this)">🎮 Gaming</span>
+                    <span class="hobby-tag" onclick="toggleTag(this)">🎵 Music</span>
+                    <span class="hobby-tag" onclick="toggleTag(this)">🍳 Cooking</span>
+                    <span class="hobby-tag" onclick="toggleTag(this)">📚 Reading</span>
+                    <span class="hobby-tag" onclick="toggleTag(this)">✈️ Travel</span>
+                    <span class="hobby-tag" onclick="toggleTag(this)">👗 Fashion</span>
+                    <span class="hobby-tag" onclick="toggleTag(this)">🎨 Art</span>
+                    <span class="hobby-tag" onclick="toggleTag(this)">📷 Photography</span>
+                    <span class="hobby-tag" onclick="toggleTag(this)">💃 Dancing</span>
+                    <span class="hobby-tag" onclick="toggleTag(this)">🎬 Movies</span>
+                    <span class="hobby-tag" onclick="toggleTag(this)">🥾 Hiking</span>
+                    <span class="hobby-tag" onclick="toggleTag(this)">💪 Gym</span>
+                </div>
+                <p style="font-size: 13px; color: #4A5568; margin-bottom: 8px;">Sports</p>
+                <div style="display: flex; flex-wrap: wrap; gap: 8px;">
+                    <span class="hobby-tag" onclick="toggleTag(this)">🏀 Basketball</span>
+                    <span class="hobby-tag" onclick="toggleTag(this)">🏈 Football</span>
+                    <span class="hobby-tag" onclick="toggleTag(this)">⚽ Soccer</span>
+                    <span class="hobby-tag" onclick="toggleTag(this)">⚾ Baseball</span>
+                    <span class="hobby-tag" onclick="toggleTag(this)">🎾 Tennis</span>
+                    <span class="hobby-tag" onclick="toggleTag(this)">🏐 Volleyball</span>
+                    <span class="hobby-tag" onclick="toggleTag(this)">🏊 Swimming</span>
+                    <span class="hobby-tag" onclick="toggleTag(this)">⛳ Golf</span>
+                    <span class="hobby-tag" onclick="toggleTag(this)">🕹️ Esports</span>
+                    <span class="hobby-tag" onclick="toggleTag(this)">🥊 MMA</span>
+                    <span class="hobby-tag" onclick="toggleTag(this)">🏃 Running</span>
+                    <span class="hobby-tag" onclick="toggleTag(this)">🛹 Skateboarding</span>
+                </div>
+                <input type="hidden" name="hobbies" id="hobbiesInput">
+            </div>
+
+            <div style="width: 80%; text-align: left; margin-top: 1.5rem;">
+                <h3>Budget</h3>
+                <label style="display: block; font-size: 13px; margin-bottom: 6px;">Monthly budget ($/mo)</label>
+                <input type="number" name="budget" placeholder="e.g. 1200" style="width: 100%; box-sizing: border-box;">
+            </div>
+
+            <div style="width: 80%; text-align: left; margin-top: 1.5rem;">
+                <h3>Lifestyle</h3>
+                <label>Cleanliness <strong id="cleanVal">80%</strong></label>
+                <input type="range" name="cleanliness" min="0" max="100" value="80" style="width: 100%;" oninput="document.getElementById('cleanVal').textContent=this.value+'%'">
+                <div style="display: flex; justify-content: space-between; font-size: 11px; color: #4A5568; margin-bottom: 16px;"><span>Relaxed</span><span>Spotless</span></div>
+
+                <label>Noise Tolerance <strong id="noiseVal">30%</strong></label>
+                <input type="range" name="noise" min="0" max="100" value="30" style="width: 100%;" oninput="document.getElementById('noiseVal').textContent=this.value+'%'">
+                <div style="display: flex; justify-content: space-between; font-size: 11px; color: #4A5568; margin-bottom: 16px;"><span>Quiet</span><span>Loud</span></div>
+
+                <label style="display: block; margin-bottom: 6px;">Sleep Schedule</label>
+                <select name="sleep_schedule" style="width: 100%; box-sizing: border-box;">
                     <option value="early">Early Bird (before 10pm)</option>
-                    <option value="normal">Normal (10pm - 12am)</option>
+                    <option value="normal">Normal (10pm – 12am)</option>
                     <option value="night">Night Owl (after 12am)</option>
                 </select>
-            </label><br><br>
+            </div>
 
-            <label>Smoking: 
-                <input type="checkbox" name="smoking" value="yes">
-            </label><br><br>
-            
-            <label>Drinking: 
-                <input type="checkbox" name="drinking" value="yes">
-            </label><br><br>
+            <div style="width: 80%; text-align: left; margin-top: 1.5rem;">
+                <h3>Habits</h3>
+                <label style="display: flex; align-items: center; gap: 10px; margin-bottom: 12px;">
+                    <input type="checkbox" name="smoking" value="yes"> I smoke
+                </label>
+                <label style="display: flex; align-items: center; gap: 10px;">
+                    <input type="checkbox" name="drinking" value="yes"> I drink
+                </label>
+            </div>
 
-            <button type="submit">Save Profile & Find Matches</button>
+            <div style="width: 80%; margin-top: 1.5rem;">
+                <button type="submit" style="width: 100%; padding: 16px; background: var(--accent-orange); color: white; border: none; border-radius: 12px; font-size: 1.1rem; font-weight: 700; cursor: pointer;">
+                    Save & Find Matches →
+                </button>
+            </div>
+
         </form>
     </div>
 
-    <script>
-        function updateSlider(sliderId, bubbleId) {
-            const slider = document.getElementById(sliderId);
-            const bubble = document.getElementById(bubbleId);
-            const val = slider.value;
-            
-            // 1. Update the text inside the bubble
-            bubble.textContent = val + '%';
-            
-            // 2. Calculate the exact position
-            const percent = (val - slider.min) / (slider.max - slider.min);
-            const thumbOffset = (0.5 - percent) * 16; 
-            
-            bubble.style.left = `calc(${percent * 100}% + ${thumbOffset}px)`;
+    <style>
+        .hobby-tag {
+            padding: 7px 14px;
+            border-radius: 20px;
+            font-size: 13px;
+            border: 1px solid #E2E8F0;
+            color: #4A5568;
+            background: white;
+            cursor: pointer;
+            user-select: none;
+            display: inline-block;
         }
+        .hobby-tag.selected {
+            background: var(--primary-navy);
+            color: white;
+            border-color: var(--primary-navy);
+        }
+    </style>
 
-        // Run the function once when the page loads to position the bubbles correctly at the start
-        window.onload = function() {
-            updateSlider('cleanSlider', 'cleanBubble');
-            updateSlider('noiseSlider', 'noiseBubble');
-        };
+    <script>
+        function toggleTag(el) {
+            el.classList.toggle('selected');
+            const selected = [...document.querySelectorAll('.hobby-tag.selected')].map(t => t.textContent.trim());
+            document.getElementById('hobbiesInput').value = selected.join(', ');
+        }
     </script>
 </body>
 </html>
