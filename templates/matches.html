@@ -36,9 +36,16 @@
                         <p style="margin: 5px 0;"><i data-lucide="dollar-sign" style="width: 18px; vertical-align: middle;"></i> ${{ match.data.budget }}/mo</p>
                     </div>
 
-                    <div style="display: flex; gap: 10px;">
-                        <a href="{{ url_for('chat', sender_id=current_user.id, receiver_id=match.data.id) }}" class="btn-primary" style="text-decoration: none; text-align: center; flex: 2; padding: 12px;">Message</a>
-                        <a href="{{ url_for('view_profile', user_id=match.data.id) }}" style="flex: 1; border: 2px solid var(--primary-navy); color: var(--primary-navy); border-radius: 12px; text-align: center; text-decoration: none; padding: 12px; font-weight: 700;">Profile</a>
+                    <div style="display: flex; gap: 10px; align-items: center;">
+                        <a href="{{ url_for('chat', sender_id=current_user.id, receiver_id=match.data.id) }}" 
+                           class="btn-primary" 
+                           style="text-decoration: none; flex: 2; padding: 12px;">
+                            Message
+                        </a>
+                        <a href="{{ url_for('view_profile', user_id=match.data.id) }}" 
+                           style="flex: 1; border: 2px solid var(--primary-navy); background: var(--primary-navy); color: white; border-radius: 12px; text-align: center; text-decoration: none; padding: 12px; font-weight: 700;">
+                            Profile
+                        </a>
                     </div>
                 </div>
                 {% endfor %}
