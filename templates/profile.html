@@ -21,7 +21,7 @@
         <div style="background: white; border-radius: 12px; padding: 25px; border: 1px solid #E2E8F0;">
             <h3>Overview</h3>
             <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 20px; margin-top: 15px;">
-                <p><strong><i data-lucide="user" style="width: 16px; vertical-align: middle;"></i> Age:</strong> {{ user.age }}</p>
+                <p><strong><i data-lucide="calendar" style="width: 16px; vertical-align: middle;"></i> Grad Year:</strong> {{ user.year }}</p>
                 <p><strong><i data-lucide="info" style="width: 16px; vertical-align: middle;"></i> Gender:</strong> {{ user.gender }}</p>
                 <p><strong><i data-lucide="dollar-sign" style="width: 16px; vertical-align: middle;"></i> Budget:</strong> ${{ user.budget }}/mo</p>
                 <p><strong><i data-lucide="moon" style="width: 16px; vertical-align: middle;"></i> Sleep:</strong> {{ user.sleep_schedule|capitalize }}</p>
@@ -31,12 +31,12 @@
             <div style="margin-top: 15px;">
                 <label>Cleanliness Standard: {{ user.cleanliness }}%</label>
                 <div style="width: 100%; background: #EDF2F7; height: 10px; border-radius: 5px; margin-top: 5px;">
-                    <div style="width: {{ user.cleanliness }}%; background: var(--primary-navy); height: 100%; border-radius: 5px;"></div>
+                    <div style="width: {{ user.cleanliness ~ '%' }}; background: var(--primary-navy); height: 100%; border-radius: 5px;"></div>
                 </div>
-                
+
                 <label style="display: block; margin-top: 15px;">Noise Tolerance: {{ user.noise_level }}%</label>
                 <div style="width: 100%; background: #EDF2F7; height: 10px; border-radius: 5px; margin-top: 5px;">
-                    <div style="width: {{ user.noise_level }}%; background: var(--accent-orange); height: 100%; border-radius: 5px;"></div>
+                    <div style="width: {{ user.noise_level ~ '%' }}; background: var(--accent-orange); height: 100%; border-radius: 5px;"></div>
                 </div>
             </div>
 
