@@ -42,7 +42,7 @@ Flask-SQLAlchemy
 
 To run: 
 ```bash
-docker run -p 5000:5000 --env-file .env lecodyy/roommate-matcher
+docker run -p 5000:5000 --env-file .env lecody/roommate-matcher
 ```
 
 
