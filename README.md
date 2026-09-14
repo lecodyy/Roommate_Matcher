@@ -22,9 +22,7 @@ Logistics: Monthly budget range and preferred student communities.
 
 Personal: Hobbies, age, and gender identity.
 
-# 🛠️ Tech Stack (Suggested)
-Note: Update this section based on your current implementation.
-
+# 🛠️ Tech Stack
 Backend: Python (Flask or Django)
 
 Frontend: HTML5, CSS3, JavaScript
@@ -41,6 +39,13 @@ Pip (Python package manager)
 Flask
 
 Flask-SQLAlchemy
+
+To run: 
+```bash
+docker run -p 5000:5000 --env-file .env lecodyy/roommate-matcher
+```
+
+
 
 
 
