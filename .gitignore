@@ -10,6 +10,7 @@
 /httpRequests/
 instance/roommates.db
 .env
+# Tests
 # Pycache
 __pycache__/
 *.pyc
