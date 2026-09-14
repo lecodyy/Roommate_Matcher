@@ -162,4 +162,4 @@ def chat(sender_id, receiver_id):
     return render_template('chat.html', sender=sender, receiver=receiver, messages=messages)
 
 if __name__ == '__main__':
-    app.run(debug=True)
+    app.run(debug=True, host='0.0.0.0')
